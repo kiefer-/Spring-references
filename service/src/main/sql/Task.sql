@@ -1,0 +1,17 @@
+--创建表 gt_task
+CREATE TABLE IF NOT EXISTS gt_task (
+category_code BIGINT UNSIGNED,
+class_code BIGINT UNSIGNED,
+purpose_code BIGINT UNSIGNED,
+title VARCHAR(255),
+comment VARCHAR(255),
+tags VARCHAR(255),
+started_time BIGINT UNSIGNED,
+ended_time BIGINT UNSIGNED,
+completed_time BIGINT UNSIGNED,
+progress SMALLINT UNSIGNED,
+assignment_order SMALLINT UNSIGNED,
+lock_version INT UNSIGNED DEFAULT 0 ,
+remark VARCHAR(1024));
+--添加主键 
+ALTER TABLE gt_task MODIFY id BIGINT UNSIGNED PRIMARY KEY AUTO_INCREMENT;

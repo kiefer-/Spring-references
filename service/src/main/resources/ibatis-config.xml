@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <settings>
+        <setting name="cacheEnabled" value="false"/>
+        <setting name="lazyLoadingEnabled" value="false"/>
+        <setting name="aggressiveLazyLoading" value="false"/>
+        <setting name="multipleResultSetsEnabled" value="false"/>
+        <setting name="useColumnLabel" value="false"/>
+        <setting name="autoMappingBehavior" value="PARTIAL"/>
+        <setting name="defaultExecutorType" value="REUSE"/>
+        <setting name="defaultStatementTimeout" value="25000"/>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <setting name="useGeneratedKeys" value="true"/>
+    </settings>
+
+    <typeAliases>
+        <typeAlias alias="Task" type="me.shouheng.service.model.po.Task"/>
+        <typeAlias alias="TaskVo" type="me.shouheng.service.model.vo.TaskVo"/>
+    </typeAliases>
+
+    <typeHandlers>
+        <typeHandler handler="me.shouheng.common.dao.handler.DateTypeHandler" javaType="java.util.Date"/>
+    </typeHandlers>
+
+    <plugins>
+        <plugin interceptor="me.shouheng.common.dao.dialect.SQLMapDialectInterceptor">
+            <property name="dialectClass" value="me.shouheng.common.dao.dialect.MySQLDialect"/>
+        </plugin>
+    </plugins>
+
+    <environments default="references">
+        <environment id="references">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/test?serverTimezone=GMT%2B8"/>
+                <property name="username" value="root"/>
+                <property name="password" value="qweasdzxc"/>
+                <property name="poolMaximumActiveConnections" value="10"/>
+                <property name="poolMaximumIdleConnections" value="20"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <mappers>
+        <mapper resource="mybatis/BaseMapper.xml"/>
+        <mapper resource="mybatis/CommonModelMapper.xml"/>
+        <mapper resource="mybatis/TaskMapper.xml"/>
+    </mappers>
+
+</configuration>
