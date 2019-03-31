@@ -5,8 +5,6 @@ import me.shouheng.service.common.dao.SqlSessionHolder;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.runner.RunWith;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -19,10 +17,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ContextConfiguration(locations={"classpath*:spring/spring-*.xml"})
 public class SpringBaseTest {
 
-    protected Logger logger = LoggerFactory.getLogger(this.getClass());
-
     public SpringBaseTest() {
-        SqlMapClientHolder.setEnvironmentId("references");
+        SqlMapClientHolder.setEnvironmentId(SqlMapClientHolder.ENV_TEST_ID);
         SqlMapClientHolder.setTestFlag(true);
 
         System.setProperty("javax.xml.parsers.DocumentBuilderFactory", "com.sun.org.apache.xerces.internal.jaxp.DocumentBuilderFactoryImpl");
@@ -30,12 +26,12 @@ public class SpringBaseTest {
     }
 
     @Before
-    public void testBefore() throws Exception {
+    public void testBefore() {
         SqlSessionHolder.initReuseSqlSession();
     }
 
     @After
-    public void testAfter() throws Exception {
+    public void testAfter() {
         SqlSessionHolder.rollbackSession();
     }
 

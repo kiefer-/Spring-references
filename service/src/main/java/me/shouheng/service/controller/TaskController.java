@@ -2,8 +2,10 @@ package me.shouheng.service.controller;
 
 import me.shouheng.service.model.so.TaskSo;
 import me.shouheng.service.model.vo.PackTaskVo;
+import me.shouheng.service.service.TaskService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +16,7 @@ import static me.shouheng.service.controller.TaskController.PATH_PREFIX;
 
 /**
  * 用于测试的控制器
+ * TODO 基于 Spring MVC 进行控制的时候，什么时候开启、关闭和回滚数据库连接呢？
  *
  * @author shouh, 2019/3/30-20:57
  */
@@ -29,6 +32,13 @@ public class TaskController {
 
     private static final String PAGE = "/page";
 
+    private final TaskService taskService;
+
+    @Autowired
+    public TaskController(TaskService taskService) {
+        this.taskService = taskService;
+    }
+
     /**
      * 测试用来发送 restful 类型的请求的接口
      *
@@ -39,7 +49,9 @@ public class TaskController {
     @RequestMapping(value = LIST, method = RequestMethod.POST)
     public PackTaskVo listAll(@RequestBody TaskSo taskSo) {
         logger.info("----------- received : " + taskSo);
-        return new PackTaskVo();
+        PackTaskVo packTaskVo = taskService.searchTask(taskSo);
+        logger.info("----------- result : " + packTaskVo);
+        return packTaskVo;
     }
 
     /**

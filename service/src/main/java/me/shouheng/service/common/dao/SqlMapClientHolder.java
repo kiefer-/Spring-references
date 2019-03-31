@@ -15,9 +15,17 @@ public class SqlMapClientHolder {
 
     private static final Logger logger = LoggerFactory.getLogger(SqlSessionHolder.class);
 
+    public static final String ENV_DEV_ID = "dev";
+
+    public static final String ENV_TEST_ID = "test";
+
+    public static final String ENV_UAT_ID = "uat";
+
+    public static final String ENV_PROD_ID = "prod";
+
     private static SqlSessionFactory sqlMapper;
 
-    private static String environmentId = "references";
+    private static String environmentId = ENV_DEV_ID;
 
     private static SqlMapClientHolder holder;
 
