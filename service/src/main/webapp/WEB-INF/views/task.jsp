@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Android References</title>
+    <title>Spring References</title>
 </head>
 <body>
 <h2>Hello World! -- from Test Page</h2>

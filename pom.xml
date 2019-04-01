@@ -36,6 +36,7 @@
         <javax.persistence-api>1.0</javax.persistence-api>
         <servlet.api>2.5</servlet.api>
         <commons-configuration>1.5</commons-configuration>
+        <lombok >1.18.6</lombok>
     </properties>
 
     <dependencyManagement>
@@ -180,6 +181,12 @@
                 <groupId>commons-configuration</groupId>
                 <artifactId>commons-configuration</artifactId>
                 <version>${commons-configuration}</version>
+            </dependency>
+            <!--Lombok-->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok}</version>
             </dependency>
             <!--endregion-->
         </dependencies>
