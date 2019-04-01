@@ -1,6 +1,9 @@
-package me.shouheng.common.exception;
+package me.shouheng.service.common.exception;
 
+import me.shouheng.common.exception.BizException;
+import me.shouheng.common.exception.DAOException;
 import me.shouheng.common.model.ClientMessage;
+import me.shouheng.service.common.util.ErrorDispUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,11 +16,11 @@ public class SystemException extends BizException {
 
     private static final Logger logger = LoggerFactory.getLogger(SystemException.class);
 
-    public static final String ERR_NULL_POINTER_CODE = "E000000000000002";
+    private static final String ERR_NULL_POINTER_CODE = "E000000000000002";
 
-    public static final String ERR_SYS_ERROR_CODE = "E000000000000003";
+    private static final String ERR_SYS_ERROR_CODE = "E000000000000003";
 
-    public static final String ERR_DAO_ERROR_CODE = "E000000000000004";
+    private static final String ERR_DAO_ERROR_CODE = "E000000000000004";
 
     public static ClientMessage getErrorMessage(Exception exception) {
         ClientMessage msg = new ClientMessage();
@@ -32,6 +35,7 @@ public class SystemException extends BizException {
             msg.setCode(ERR_SYS_ERROR_CODE);
         }
         msg.setMessage(exception.getMessage());
+        msg.setMessageCN(ErrorDispUtils.getInstance().getValue(msg.getCode()));
         return msg;
     }
 }

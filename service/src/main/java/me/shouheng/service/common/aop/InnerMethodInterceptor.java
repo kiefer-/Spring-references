@@ -1,7 +1,7 @@
 package me.shouheng.service.common.aop;
 
 import me.shouheng.common.exception.OptLockException;
-import me.shouheng.common.exception.SystemException;
+import me.shouheng.service.common.exception.SystemException;
 import me.shouheng.common.model.AbstractPackVo;
 import me.shouheng.common.model.ClientMessage;
 import me.shouheng.service.common.dao.SqlSessionHolder;
@@ -163,7 +163,6 @@ public class InnerMethodInterceptor implements MethodInterceptor {
             messages.add(msg);
         } else {
             ClientMessage msg = SystemException.getErrorMessage(exception);
-            msg.setMessageCN(ErrorDispUtils.getInstance().getValue(msg.getCode()));
             messages.add(msg);
         }
         return messages;
