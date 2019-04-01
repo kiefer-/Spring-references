@@ -2,7 +2,7 @@ package me.shouheng.service.common.dao;
 
 import me.shouheng.common.dao.DAO;
 import me.shouheng.common.exception.DAOException;
-import me.shouheng.common.exception.OptLockException;
+import me.shouheng.service.common.exception.OptLockException;
 import me.shouheng.common.model.AbstractPO;
 import me.shouheng.common.model.query.SearchObject;
 import org.apache.ibatis.io.Resources;

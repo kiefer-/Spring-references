@@ -1,11 +1,10 @@
 package me.shouheng.service.common.aop;
 
-import me.shouheng.common.exception.OptLockException;
-import me.shouheng.service.common.exception.SystemException;
 import me.shouheng.common.model.AbstractPackVo;
 import me.shouheng.common.model.ClientMessage;
 import me.shouheng.service.common.dao.SqlSessionHolder;
-import me.shouheng.service.common.util.ErrorDispUtils;
+import me.shouheng.service.common.exception.OptLockException;
+import me.shouheng.service.common.exception.SystemException;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 import org.slf4j.Logger;
@@ -155,11 +154,7 @@ public class InnerMethodInterceptor implements MethodInterceptor {
     private List<ClientMessage> getClientMessage(Exception exception) {
         List<ClientMessage> messages = new LinkedList<>();
         if (exception instanceof OptLockException) {
-            ClientMessage msg = new ClientMessage();
-            String code = OptLockException.ERR_OPT_LOCK_CODE;
-            msg.setCode(code);
-            msg.setMessage(exception.getMessage());
-            msg.setMessageCN(ErrorDispUtils.getInstance().getValue(code));
+            ClientMessage msg = OptLockException.getErrorMessage(exception);
             messages.add(msg);
         } else {
             ClientMessage msg = SystemException.getErrorMessage(exception);
