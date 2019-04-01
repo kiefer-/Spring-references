@@ -3,7 +3,7 @@ package me.shouheng.common.exception;
 /**
  * @author shouh, 2019/3/31-14:37
  */
-public class DAOException extends RuntimeException {
+public class DAOException extends BizException {
 
     public DAOException() {
     }

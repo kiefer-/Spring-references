@@ -3,7 +3,11 @@ package me.shouheng.common.exception;
 /**
  * @author shouh, 2019/3/31-15:48
  */
-public class OptLockException extends RuntimeException {
+public class OptLockException extends BizException {
+
+    private static final long serialVersionUID = -4487429038874269500L;
+
+    public static final String ERR_OPT_LOCK_CODE = "E000000000000001";
 
     public OptLockException() {
     }
