@@ -1,6 +1,6 @@
 package me.shouheng.common.generator;
 
-import me.shouheng.common.util.StringUtils;
+import me.shouheng.common.util.TextUtils;
 
 import javax.persistence.Table;
 import java.io.*;
@@ -87,7 +87,7 @@ public final class CodeGenerator {
         Class clazz = Class.forName(PO_CLASS_PATH);
 
         OUTPUT_DIR = getInputPath("请输入输出文件路径:").trim();
-        OUTPUT_DIR = StringUtils.isEmpty(OUTPUT_DIR) ? DEFAULT_OUTPUT_DIR : OUTPUT_DIR;
+        OUTPUT_DIR = TextUtils.isEmpty(OUTPUT_DIR) ? DEFAULT_OUTPUT_DIR : OUTPUT_DIR;
         OUTPUT_DIR += DIR_SPLIT + clazz.getSimpleName();
 
         File outPutDir = new File(OUTPUT_DIR);

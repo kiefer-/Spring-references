@@ -35,6 +35,8 @@
     <typeAliases>
         <typeAlias alias="Task" type="me.shouheng.service.model.po.Task"/>
         <typeAlias alias="TaskVo" type="me.shouheng.service.model.vo.TaskVo"/>
+        <typeAlias alias="user" type="me.shouheng.service.model.po.User"/>
+        <typeAlias alias="userVo" type="me.shouheng.service.model.vo.UserVo"/>
         <typeAlias alias="DRUID" type="me.shouheng.service.common.dao.DruidDataSourceFactory"/>
     </typeAliases>
 
@@ -90,6 +92,7 @@
         <mapper resource="mybatis/BaseMapper.xml"/>
         <mapper resource="mybatis/CommonModelMapper.xml"/>
         <mapper resource="mybatis/TaskMapper.xml"/>
+        <mapper resource="mybatis/UserMapper.xml"/>
     </mappers>
 
 </configuration>

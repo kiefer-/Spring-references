@@ -1,6 +1,6 @@
 package me.shouheng.common;
 
-import me.shouheng.common.util.StringUtils;
+import me.shouheng.common.util.TextUtils;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -11,9 +11,9 @@ import org.slf4j.LoggerFactory;
 /**
  * @author shouh, 2019/3/30-16:20
  */
-public class StringUtilsTest {
+public class TextUtilsTest {
 
-    private Logger logger = LoggerFactory.getLogger(StringUtilsTest.class);
+    private Logger logger = LoggerFactory.getLogger(TextUtilsTest.class);
 
     @Before
     public void before() {
@@ -27,6 +27,6 @@ public class StringUtilsTest {
 
     @Test
     public void testEmpty() {
-        Assert.assertTrue(StringUtils.isEmpty(""));
+        Assert.assertTrue(TextUtils.isEmpty(""));
     }
 }

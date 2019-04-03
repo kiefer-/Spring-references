@@ -1,6 +1,6 @@
 package me.shouheng.common.generator;
 
-import me.shouheng.common.util.StringUtils;
+import me.shouheng.common.util.TextUtils;
 import me.shouheng.common.util.ReflectionUtil;
 
 import javax.persistence.Column;
@@ -74,7 +74,7 @@ class JPAHelper {
     static String getColumnType(Field f, Class type) {
         String columnType;
         if (f.isAnnotationPresent(Column.class)
-                && !StringUtils.isEmpty(f.getAnnotation(Column.class).columnDefinition())) {
+                && !TextUtils.isEmpty(f.getAnnotation(Column.class).columnDefinition())) {
             // 如果定义在Column中定义了列的数据类型，就使用指定的数据类型
             columnType = f.getAnnotation(Column.class).columnDefinition();
         } else if (f.isAnnotationPresent(Id.class)) {

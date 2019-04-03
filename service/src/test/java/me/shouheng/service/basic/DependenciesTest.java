@@ -1,6 +1,6 @@
 package me.shouheng.service.basic;
 
-import me.shouheng.common.util.StringUtils;
+import me.shouheng.common.util.TextUtils;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -13,6 +13,6 @@ public class DependenciesTest {
 
     @Test
     public void testDependency() {
-        Assert.assertTrue(StringUtils.isEmpty(""));
+        Assert.assertTrue(TextUtils.isEmpty(""));
     }
 }

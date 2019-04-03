@@ -37,6 +37,7 @@
         <servlet.api>2.5</servlet.api>
         <commons-configuration>1.5</commons-configuration>
         <lombok >1.18.6</lombok>
+        <shiro >1.4.0</shiro>
     </properties>
 
     <dependencyManagement>
@@ -101,6 +102,23 @@
                 <groupId>javax.servlet</groupId>
                 <artifactId>servlet-api</artifactId>
                 <version>${servlet.api}</version>
+            </dependency>
+            <!--endregion-->
+            <!--region Shiro-->
+            <dependency>
+                <groupId>org.apache.shiro</groupId>
+                <artifactId>shiro-core</artifactId>
+                <version>${shiro}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.shiro</groupId>
+                <artifactId>shiro-web</artifactId>
+                <version>${shiro}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.shiro</groupId>
+                <artifactId>shiro-spring</artifactId>
+                <version>${shiro}</version>
             </dependency>
             <!--endregion-->
             <!--region 数据库连接-->

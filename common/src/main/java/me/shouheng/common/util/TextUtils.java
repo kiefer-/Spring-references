@@ -3,7 +3,7 @@ package me.shouheng.common.util;
 /**
  * @author shouh 2019/3/30-16:18
  */
-public class StringUtils {
+public class TextUtils {
 
     /**
      * If the given text is empty, that is null or length equals 0

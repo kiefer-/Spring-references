@@ -1,0 +1,12 @@
+--创建表 gt_user
+CREATE TABLE IF NOT EXISTS gt_user (
+id BIGINT UNSIGNED,
+created_time BIGINT UNSIGNED,
+updated_time BIGINT UNSIGNED,
+remark VARCHAR(255),
+lock_version INT UNSIGNED,
+user_name VARCHAR(255),
+password VARCHAR(255),
+role VARCHAR(255));
+--添加主键 
+ALTER TABLE gt_user MODIFY id BIGINT UNSIGNED PRIMARY KEY AUTO_INCREMENT;

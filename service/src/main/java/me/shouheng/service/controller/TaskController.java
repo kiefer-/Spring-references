@@ -16,7 +16,6 @@ import static me.shouheng.service.controller.TaskController.PATH_PREFIX;
 
 /**
  * 用于测试的控制器
- * TODO 基于 Spring MVC 进行控制的时候，什么时候开启、关闭和回滚数据库连接呢？
  *
  * @author shouh, 2019/3/30-20:57
  */
@@ -28,7 +27,9 @@ public class TaskController {
 
     static final String PATH_PREFIX = "/task";
 
-    private static final String LIST = "/all";
+    private static final String LIST = "/v1/all";
+
+    private static final String LIST2 = "/v2/all";
 
     private static final String PAGE = "/page";
 
@@ -55,12 +56,27 @@ public class TaskController {
     }
 
     /**
+     * {@link #listAll(TaskSo)} 的 v2 版本
+     *
+     * @param taskSo so 对象
+     * @return 请求结果
+     */
+    @ResponseBody
+    @RequestMapping(value = LIST2, method = RequestMethod.POST)
+    public PackTaskVo listAll2(@RequestBody TaskSo taskSo) {
+        logger.info("----------- received : " + taskSo);
+        PackTaskVo packTaskVo = taskService.searchTask(taskSo);
+        logger.info("----------- result : " + packTaskVo);
+        return packTaskVo;
+    }
+
+    /**
      * 测试用来请求 jsp 页面的接口
      *
-     * @return jsp 页面（名称），映射到 view/task.jsp
+     * @return jsp 页面（名称），映射到 views/task.jsp
      */
     @RequestMapping(value = PAGE, method = RequestMethod.GET)
-    public String testPage() {
+    public String page() {
         logger.info("----------- requesting test page.");
         return "task";
     }
