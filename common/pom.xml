@@ -60,6 +60,21 @@
             <groupId>com.github.dozermapper</groupId>
             <artifactId>dozer-core</artifactId>
         </dependency>
+
+        <!--region fasterxml-->
+        <!--<dependency>-->
+        <!--<groupId>com.alibaba</groupId>-->
+        <!--<artifactId>fastjson</artifactId>-->
+        <!--</dependency>-->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
+        <!--endregion-->
     </dependencies>
 
 </project>
