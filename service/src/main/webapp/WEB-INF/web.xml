@@ -35,7 +35,7 @@
     <!--选择要激活的 Spring 环境配置-->
     <context-param>
         <param-name>spring.profiles.active</param-name>
-        <param-value>test</param-value>
+        <param-value>dev</param-value>
     </context-param>
 
 </web-app>

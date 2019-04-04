@@ -29,6 +29,15 @@ public class InnerMethodInterceptor implements MethodInterceptor {
      */
     private static final long LOG_METHOD_EXECUTION_TIME = 1000L;
 
+    /**
+     * 用来对被拦截的方法进行处理，目前主要的责任有两个：
+     * 1.进行数据库连接、提交和回滚；
+     * 2.对发生错误的信息进行包装，返回错误结果。
+     *
+     * @param methodInvocation 调用的方法
+     * @return 返回方法结果
+     * @throws Throwable 抛出异常
+     */
     @Override
     public Object invoke(MethodInvocation methodInvocation) throws Throwable {
         Method targetMethod = methodInvocation.getMethod();

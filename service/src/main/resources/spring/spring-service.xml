@@ -20,10 +20,13 @@
     <bean id="mapper" factory-bean="dozerBeanMapperBuilder" factory-method="build"/>
     <bean id="dozerBeanMapperBuilder" class="com.github.dozermapper.core.DozerBeanMapperBuilder"/>
 
-    <!--Service 切入-->
+    <!--Service 方法切入进行事务管理，比较粗粒度的事务管理，所以需要配置事务的传播行为-->
     <bean id="handler" class="me.shouheng.service.common.aop.InnerMethodInterceptor"/>
     <aop:config>
-        <aop:pointcut id="pointcut" expression="@annotation(org.springframework.web.bind.annotation.RequestMapping)"/>
+        <!--对Controller的方法的拦截-->
+        <!--<aop:pointcut id="pointcut" expression="@annotation(org.springframework.web.bind.annotation.RequestMapping)"/>-->
+        <!--对Service的方法的拦截-->
+        <aop:pointcut id="pointcut" expression="within(me.shouheng.service.service.impl.*)"/>
         <aop:advisor advice-ref="handler" id="advisor" pointcut-ref="pointcut"/>
     </aop:config>
 

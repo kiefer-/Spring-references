@@ -2,8 +2,11 @@ package me.shouheng.service.controller;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import me.shouheng.common.model.BusinessRequest;
+import me.shouheng.common.model.BusinessResponse;
 import me.shouheng.service.model.so.TaskSo;
 import me.shouheng.service.model.vo.PackTaskVo;
+import me.shouheng.service.model.vo.TaskVo;
 import me.shouheng.service.service.TaskService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,9 +33,11 @@ public class TaskController {
 
     static final String PATH_PREFIX = "/task";
 
-    private static final String LIST = "/v1/all";
+    private static final String LIST1 = "/v1/all";
 
     private static final String LIST2 = "/v2/all";
+
+    private static final String LIST3 = "/v3/all";
 
     private static final String PAGE = "/page";
 
@@ -52,7 +57,7 @@ public class TaskController {
      * @return 返回对象
      */
     @ResponseBody
-    @RequestMapping(value = LIST, method = RequestMethod.POST)
+    @RequestMapping(value = LIST1, method = RequestMethod.POST)
     public PackTaskVo listAll(@RequestBody TaskSo taskSo) {
         logger.info("----------- received : " + taskSo);
         PackTaskVo packTaskVo = taskService.searchTask(taskSo);
@@ -73,6 +78,31 @@ public class TaskController {
         PackTaskVo packTaskVo = taskService.searchTask(taskSo);
         logger.info("----------- result : " + packTaskVo);
         return packTaskVo;
+    }
+
+    /**
+     * 基于 {@link BusinessRequest} 和 {@link BusinessResponse} 的请求和响应类型的接口
+     *
+     * @param businessRequest 请求对象
+     * @return 响应对象
+     */
+    @ResponseBody
+    @RequestMapping(value = LIST3, method = RequestMethod.POST)
+    public BusinessResponse<TaskVo> listAll3(@RequestBody BusinessRequest<TaskSo> businessRequest) {
+        logger.info("request data : {}", businessRequest);
+        TaskSo taskSo = businessRequest.getRequestData();
+        PackTaskVo packTaskVo = taskService.searchTask(taskSo);
+        // 将查询到的结果封装成 BusinessResponse 并返回
+        BusinessResponse<TaskVo> businessResponse = new BusinessResponse<>();
+        businessResponse.setIsSuccess(true);
+        businessResponse.setResponseData(packTaskVo.getVo());
+        if (packTaskVo.getMessages() != null) {
+            StringBuilder sb = new StringBuilder();
+            packTaskVo.getMessages().forEach(clientMessage -> sb.append(clientMessage.getMessage()));
+            businessResponse.setServerMessage(sb.toString());
+        }
+        logger.info("response data : {}", businessResponse);
+        return businessResponse;
     }
 
     /**
