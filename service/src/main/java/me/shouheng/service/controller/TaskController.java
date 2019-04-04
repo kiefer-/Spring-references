@@ -1,5 +1,7 @@
 package me.shouheng.service.controller;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import me.shouheng.service.model.so.TaskSo;
 import me.shouheng.service.model.vo.PackTaskVo;
 import me.shouheng.service.service.TaskService;
@@ -7,10 +9,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
 
 import static me.shouheng.service.controller.TaskController.PATH_PREFIX;
 
@@ -19,6 +21,7 @@ import static me.shouheng.service.controller.TaskController.PATH_PREFIX;
  *
  * @author shouh, 2019/3/30-20:57
  */
+@Api(tags = "用于测试的接口")
 @Controller
 @RequestMapping(path = {PATH_PREFIX})
 public class TaskController {
@@ -32,6 +35,8 @@ public class TaskController {
     private static final String LIST2 = "/v2/all";
 
     private static final String PAGE = "/page";
+
+    private static final String UPLOAD = "/upload";
 
     private final TaskService taskService;
 
@@ -75,10 +80,40 @@ public class TaskController {
      *
      * @return jsp 页面（名称），映射到 views/task.jsp
      */
+    @ApiOperation(value = "展示一个 jsp 页面")
     @RequestMapping(value = PAGE, method = RequestMethod.GET)
     public String page() {
         logger.info("----------- requesting test page.");
         return "task";
+    }
+
+    /**
+     * 用来处理文件上传请求的控制器
+     *
+     * @param file 要上传的文件
+     * @return 请求结果
+     */
+    @ResponseBody
+    @RequestMapping(value = UPLOAD, method = RequestMethod.POST)
+    public String upload(@RequestParam("file") MultipartFile file) {
+        if (!file.isEmpty()) {
+            try {
+                // 文件存放服务端的位置
+                String rootPath = "d:/tmp";
+                File dir = new File(rootPath + File.separator + "tmpFiles");
+                if (!dir.exists()) {
+                    dir.mkdirs();
+                }
+                // 写文件到服务器
+                File serverFile = new File(dir.getAbsolutePath() + File.separator + file.getOriginalFilename());
+                file.transferTo(serverFile);
+                return "Uploaded file=" +  file.getOriginalFilename();
+            } catch (Exception e) {
+                return "Failed to upload " +  file.getOriginalFilename() + " => " + e.getMessage();
+            }
+        } else {
+            return "Failed to upload " +  file.getOriginalFilename() + ", file was empty.";
+        }
     }
 
 }

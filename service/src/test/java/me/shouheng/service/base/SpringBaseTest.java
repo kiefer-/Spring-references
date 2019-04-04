@@ -18,7 +18,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class SpringBaseTest {
 
     public SpringBaseTest() {
-        SqlMapClientHolder.setEnvironmentId(SqlMapClientHolder.ENV_TEST_ID);
+        SqlMapClientHolder.setEnvironmentId(SqlMapClientHolder.ENV_DRUID_ID);
         SqlMapClientHolder.setTestFlag(true);
 
         System.setProperty("javax.xml.parsers.DocumentBuilderFactory", "com.sun.org.apache.xerces.internal.jaxp.DocumentBuilderFactoryImpl");

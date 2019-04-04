@@ -38,6 +38,9 @@
         <commons-configuration>1.5</commons-configuration>
         <lombok >1.18.6</lombok>
         <shiro >1.4.0</shiro>
+        <commons-fileupload >1.4</commons-fileupload>
+        <h2.version >1.4.197</h2.version>
+        <swagger2 >2.6.1</swagger2>
     </properties>
 
     <dependencyManagement>
@@ -121,12 +124,29 @@
                 <version>${shiro}</version>
             </dependency>
             <!--endregion-->
+            <!--region Swagger-->
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger2</artifactId>
+                <version>${swagger2}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger-ui</artifactId>
+                <version>${swagger2}</version>
+            </dependency>
+            <!--endregion-->
             <!--region 数据库连接-->
-            <!--MySQL 连接驱动-->
+            <!--数据库连接驱动-->
             <dependency>
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
                 <version>${mysql-connecotr}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.h2database</groupId>
+                <artifactId>h2</artifactId>
+                <version>${h2.version}</version>
             </dependency>
             <!--Druid 数据库连接池-->
             <dependency>
@@ -205,6 +225,12 @@
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
                 <version>${lombok}</version>
+            </dependency>
+            <!--文件上传-->
+            <dependency>
+                <groupId>commons-fileupload</groupId>
+                <artifactId>commons-fileupload</artifactId>
+                <version>${commons-fileupload}</version>
             </dependency>
             <!--endregion-->
         </dependencies>

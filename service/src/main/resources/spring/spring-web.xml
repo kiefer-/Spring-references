@@ -14,6 +14,12 @@
     <context:component-scan base-package="me.shouheng.service.controller">
     </context:component-scan>
 
+    <!--Swagger 配置，文档位置：http://localhost:8080/${projectName}/swagger-ui.html-->
+    <bean class="me.shouheng.service.common.swagger.SwaggerApiConfig"/>
+    <mvc:default-servlet-handler/>
+    <mvc:resources mapping="swagger-ui.html" location="classpath:/META-INF/resources/"/>
+    <mvc:resources mapping="/webjars/**" location="classpath:/META-INF/resources/webjars/"/>
+
     <!--请求映射器-->
     <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping"/>
 
@@ -24,6 +30,12 @@
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/views/"/>
         <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <!--用来处理文件上传的请求-->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="4194304" />
+        <property name="maxInMemorySize" value="4194304" />
     </bean>
 
 </beans>

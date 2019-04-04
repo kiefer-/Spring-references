@@ -52,9 +52,10 @@
         </plugin>
     </plugins>
 
-    <environments default="dev">
-        <!--使用POOLED作为数据源-->
-        <environment id="dev">
+    <!--环境：数据源配置-->
+    <environments default="druid">
+        <!--使用 POOLED 作为数据源，注意：这种方式的数据源与激活的 profile 无关！-->
+        <environment id="pooled">
             <transactionManager type="JDBC"/>
             <dataSource type="POOLED">
                 <property name="driver" value="com.mysql.jdbc.Driver"/>
@@ -65,29 +66,14 @@
                 <property name="poolMaximumIdleConnections" value="20"/>
             </dataSource>
         </environment>
-        <!--使用POOLED作为数据源-->
-        <environment id="test">
-            <transactionManager type="JDBC"/>
-            <dataSource type="POOLED">
-                <property name="driver" value="com.mysql.jdbc.Driver"/>
-                <property name="url" value="jdbc:mysql://localhost:3306/test?serverTimezone=GMT%2B8"/>
-                <property name="username" value="root"/>
-                <property name="password" value="qweasdzxc"/>
-                <property name="poolMaximumActiveConnections" value="10"/>
-                <property name="poolMaximumIdleConnections" value="20"/>
-            </dataSource>
-        </environment>
-        <!--使用DruidDataSourceFactory作为数据源-->
-        <environment id="uat">
-            <transactionManager type="JDBC"/>
-            <dataSource type="DRUID"/>
-        </environment>
-        <environment id="prod">
+        <!--使用 Druid 作为数据库的数据源，具体的数据源将依赖激活的 profile 文件-->
+        <environment id="druid">
             <transactionManager type="JDBC"/>
             <dataSource type="DRUID"/>
         </environment>
     </environments>
 
+    <!--Mapper 文件的位置-->
     <mappers>
         <mapper resource="mybatis/BaseMapper.xml"/>
         <mapper resource="mybatis/CommonModelMapper.xml"/>

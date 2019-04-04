@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import static me.shouheng.service.controller.UserController.PATH_PREFIX;
@@ -37,7 +38,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @RequestMapping(path = REGISTER)
+    @RequestMapping(path = REGISTER, method = RequestMethod.POST)
     @ResponseBody
     public PackUserVo register(@RequestBody UserVo user) {
         logger.info("app register info {}", user);
@@ -59,7 +60,7 @@ public class UserController {
      * @param user 用户信息
      * @return 登录结果
      */
-    @RequestMapping(path = LOGIN)
+    @RequestMapping(path = LOGIN, method = RequestMethod.POST)
     @ResponseBody
     public PackUserVo login(@RequestBody UserVo user) {
         logger.info("app login info {}", user);
