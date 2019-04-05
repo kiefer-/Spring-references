@@ -75,6 +75,11 @@
             <artifactId>jackson-databind</artifactId>
         </dependency>
         <!--endregion-->
+
+        <dependency>
+            <groupId>org.jasypt</groupId>
+            <artifactId>jasypt</artifactId>
+        </dependency>
     </dependencies>
 
 </project>
