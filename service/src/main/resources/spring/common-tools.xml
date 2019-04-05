@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <description>用来注册 common 中的工具类</description>
+
+    <!--Dozer 转换工具类-->
+    <bean id="dozerBeanUtil" class="me.shouheng.common.util.DozerBeanUtil">
+        <constructor-arg ref="mapper"/>
+    </bean>
+    <bean id="mapper" factory-bean="dozerBeanMapperBuilder" factory-method="build"/>
+    <bean id="dozerBeanMapperBuilder" class="com.github.dozermapper.core.DozerBeanMapperBuilder"/>
+
+    <!--邮箱工具类-->
+    <bean class="me.shouheng.common.mail.MailSender">
+        <property name="userName" value="spring_references@163.com"/>
+        <property name="password" value="myspring0"/>
+        <property name="host" value="smtp.163.com"/>
+        <property name="auth" value="true"/>
+    </bean>
+
+</beans>

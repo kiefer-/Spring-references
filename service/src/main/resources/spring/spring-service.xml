@@ -10,15 +10,11 @@
        http://www.springframework.org/schema/aop
        http://www.springframework.org/schema/aop/spring-aop.xsd ">
 
-    <!--启用自动扫描-->
-    <context:component-scan base-package="me.shouheng.service.service.*"/>
+    <!--引入 common 中的工具类的配置文件-->
+    <import resource="common-tools.xml"/>
 
-    <!--Dozer 转换工具类-->
-    <bean id="dozerBeanUtil" class="me.shouheng.common.util.DozerBeanUtil">
-        <constructor-arg ref="mapper"/>
-    </bean>
-    <bean id="mapper" factory-bean="dozerBeanMapperBuilder" factory-method="build"/>
-    <bean id="dozerBeanMapperBuilder" class="com.github.dozermapper.core.DozerBeanMapperBuilder"/>
+    <!--启用自动扫描-->
+    <context:component-scan base-package="me.shouheng.service.*"/>
 
     <!--Service 方法切入进行事务管理，比较粗粒度的事务管理，所以需要配置事务的传播行为-->
     <bean id="serviceHandler" class="me.shouheng.service.common.aop.ServiceMethodInterceptor"/>
