@@ -42,21 +42,12 @@ public class ServiceMethodInterceptor implements MethodInterceptor {
         Method targetMethod = methodInvocation.getMethod();
         Object ret;
         try {
-            // 初始化数据库连接
-//            SqlSessionHolder.initReuseSqlSession();
             // 进行安全校验并触发方法
             ret = checkSecurityAndInvokeBizMethod(methodInvocation);
-            // 提交事务
-//            SqlSessionHolder.commitSession();
         } catch (Exception e) {
             logger.error("Error calling " + targetMethod.getName() + " : " + e);
-            // 事务回滚
-//            SqlSessionHolder.rollbackSession();
             // 包装异常信息之后将其返回给客户端
             return this.createExceptionResult(methodInvocation, e);
-        } finally {
-            // 清空会话信息
-//            SqlSessionHolder.clearSession();
         }
         return ret;
     }

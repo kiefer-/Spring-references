@@ -31,6 +31,16 @@ public class DateTypeHandler extends BaseTypeHandler<Date> {
     }
 
     @Override
+    public Date getNullableResult(ResultSet rs, int i) throws SQLException {
+        if (rs.wasNull()) {
+            return new Date(0);
+        } else {
+            Long millis = rs.getLong(i);
+            return new Date(millis);
+        }
+    }
+
+    @Override
     public Date getNullableResult(CallableStatement cs, int columnIndex) throws SQLException {
         if (cs.wasNull()) {
             return new Date(0);

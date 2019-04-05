@@ -33,15 +33,15 @@ public class UserServiceImpl implements UserService {
     public PackUserVo createUser(UserVo vo){
         PackUserVo packVo = new PackUserVo();
         User entity = dozerBeanUtil.convert(vo, User.class);
-        User returnEntity = userDAO.createPOReturnObj(entity);
-        packVo.setVo(dozerBeanUtil.convert(returnEntity, UserVo.class));
+        userDAO.insert(entity);
+        packVo.setVo(dozerBeanUtil.convert(entity, UserVo.class));
         return packVo;
     }
 
     @Override
     public PackUserVo getUser(Long primaryKey){
         PackUserVo packVo = new PackUserVo();
-        User returnEntity = userDAO.getPO(primaryKey);
+        User returnEntity = userDAO.selectByPrimaryKey(primaryKey);
         packVo.setVo(dozerBeanUtil.convert(returnEntity, UserVo.class));
         return packVo;
     }
@@ -50,22 +50,22 @@ public class UserServiceImpl implements UserService {
     public PackUserVo updateUser(UserVo vo){
         PackUserVo packVo = new PackUserVo();
         User po = dozerBeanUtil.convert(vo, User.class);
-        User returnEntity = userDAO.updatePOReturnObj(po);
-        packVo.setVo(dozerBeanUtil.convert(returnEntity, UserVo.class));
+        userDAO.update(po);
+        packVo.setVo(dozerBeanUtil.convert(po, UserVo.class));
         return packVo;
     }
 
     @Override
     public PackUserVo deleteUser(Long primaryKey){
         PackUserVo packVo = new PackUserVo();
-        userDAO.deletePOById(primaryKey);
+        userDAO.deleteByPrimaryKey(primaryKey);
         return packVo;
     }
 
     @Override
     public PackUserVo searchUser(UserSo so){
         PackUserVo packVo = new PackUserVo();
-        List<UserVo> voList = userDAO.searchVOs(so);
+        List<UserVo> voList = userDAO.searchVosBySo(so);
         packVo.setVoList(voList);
         return packVo;
     }
@@ -73,7 +73,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public PackUserVo searchUserCount(UserSo so){
         PackUserVo packVo = new PackUserVo();
-        Long count = userDAO.searchPOsCount(so);
+        Long count = userDAO.searchCountBySo(so);
         packVo.setUdf1(count);
         return packVo;
     }

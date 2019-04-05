@@ -33,15 +33,15 @@ public class TaskServiceImpl implements TaskService {
     public PackTaskVo createTask(TaskVo vo){
         PackTaskVo packVo = new PackTaskVo();
         Task entity = dozerBeanUtil.convert(vo, Task.class);
-        Task returnEntity = taskDAO.createPOReturnObj(entity);
-        packVo.setVo(dozerBeanUtil.convert(returnEntity, TaskVo.class));
+        taskDAO.insert(entity);
+        packVo.setVo(dozerBeanUtil.convert(entity, TaskVo.class));
         return packVo;
     }
 
     @Override
     public PackTaskVo getTask(Long primaryKey){
         PackTaskVo packVo = new PackTaskVo();
-        Task returnEntity = taskDAO.getPO(primaryKey);
+        Task returnEntity = taskDAO.selectByPrimaryKey(primaryKey);
         packVo.setVo(dozerBeanUtil.convert(returnEntity, TaskVo.class));
         return packVo;
     }
@@ -50,22 +50,22 @@ public class TaskServiceImpl implements TaskService {
     public PackTaskVo updateTask(TaskVo vo){
         PackTaskVo packVo = new PackTaskVo();
         Task po = dozerBeanUtil.convert(vo, Task.class);
-        Task returnEntity = taskDAO.updatePOReturnObj(po);
-        packVo.setVo(dozerBeanUtil.convert(returnEntity, TaskVo.class));
+        taskDAO.update(po);
+        packVo.setVo(dozerBeanUtil.convert(po, TaskVo.class));
         return packVo;
     }
 
     @Override
     public PackTaskVo deleteTask(Long primaryKey){
         PackTaskVo packVo = new PackTaskVo();
-        taskDAO.deletePOById(primaryKey);
+        taskDAO.deleteByPrimaryKey(primaryKey);
         return packVo;
     }
 
     @Override
     public PackTaskVo searchTask(TaskSo so){
         PackTaskVo packVo = new PackTaskVo();
-        List<TaskVo> voList = taskDAO.searchVOs(so);
+        List<TaskVo> voList = taskDAO.searchVosBySo(so);
         packVo.setVoList(voList);
         return packVo;
     }
@@ -73,7 +73,7 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public PackTaskVo searchTaskCount(TaskSo so){
         PackTaskVo packVo = new PackTaskVo();
-        Long count = taskDAO.searchPOsCount(so);
+        Long count = taskDAO.searchCountBySo(so);
         packVo.setUdf1(count);
         return packVo;
     }

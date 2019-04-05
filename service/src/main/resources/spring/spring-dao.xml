@@ -6,13 +6,6 @@
 
     <description>Spring DAO 层的配置</description>
 
-    <context:component-scan base-package="me.shouheng.service.dao.*"/>
-
-    <!--配置全局单例的Druid数据源提供器，交给Spring容器管理-->
-    <!--<bean class="me.shouheng.service.common.dao.DruidDataSourceProvider" factory-method="getInstance">-->
-        <!--<property name="dataSource" ref="dataSource"/>-->
-    <!--</bean>-->
-
     <!--Druid 配置：https://github.com/alibaba/druid/wiki/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98-->
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
         <property name="driverClassName" value="${jdbc.driverClassName}"/>
@@ -52,11 +45,6 @@
         <property name="statementExecutableSqlLogEnable" value="false" />
     </bean>
 
-    <!--事务配置-->
-    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-        <property name="dataSource" ref="dataSource" />
-    </bean>
-
     <!-- 配置SqlSessionFactory对象 -->
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <!-- 注入数据库连接池 -->
@@ -67,29 +55,13 @@
         <property name="typeAliasesPackage" value="me.shouheng.service.model" />
         <!-- 扫描sql配置文件:mapper需要的xml文件 -->
         <property name="mapperLocations" value="classpath:mybatis/*.xml" />
-        <!-- 类型别名是为 Java 类型设置一个短的名字。 它只和 XML 配置有关，存在的意义仅在于用来减少类完全限定名的冗余 -->
-        <!--<property name="typeAliases" value="me.shouheng.service.common.dao.DruidDataSourceFactory"/>-->
         <!-- 类型处理器：用来将获取的值以合适的方式转换成 Java 类型 -->
         <property name="typeHandlers">
             <array>
                 <bean class="me.shouheng.common.dao.handler.DateTypeHandler"/>
             </array>
         </property>
-        <!-- 插件：用来在已映射语句执行过程中的某一点进行拦截调用 -->
-        <property name="plugins">
-            <array>
-                <bean class="me.shouheng.common.dao.dialect.SQLMapDialectInterceptor">
-                    <property name="dialect">
-                        <bean class="me.shouheng.common.dao.dialect.MySQLDialect"/>
-                    </property>
-                </bean>
-            </array>
-        </property>
     </bean>
-
-    <!--<bean class="me.shouheng.service.common.dao.SqlSessionFactoryProvider" factory-method="getInstance">-->
-        <!--<property name="sessionFactoryBean" ref="sqlSessionFactory"/>-->
-    <!--</bean>-->
 
     <!-- 4.配置扫描Dao接口包，动态实现Dao接口，注入到spring容器中 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
@@ -99,8 +71,13 @@
         <property name="basePackage" value="me.shouheng.service.dao" />
     </bean>
 
+    <!--事务配置-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+
     <!--使用annotation注解方式配置事务-->
-    <tx:annotation-driven/>
+    <tx:annotation-driven transaction-manager="transactionManager"/>
 
     <beans profile="dev">
         <context:property-placeholder location="classpath*:configs/jdbc-dev.properties" />

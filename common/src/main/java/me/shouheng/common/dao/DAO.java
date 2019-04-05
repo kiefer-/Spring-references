@@ -11,36 +11,22 @@ import java.util.List;
  */
 public interface DAO<T extends AbstractPO> {
 
-    Long createPO(T entity) throws DAOException;
+    void insert(T entity) throws DAOException;
 
-    T createPOReturnObj(T entity) throws DAOException;
-
-    List<Long> createPOBatch(List<T> entityList) throws DAOException;
-
-
-    T getPO(Long primaryKey) throws DAOException;
-
-    <E> E getVO(Long primaryKey) throws DAOException;
-
-    List<T> searchPOs(SearchObject so) throws DAOException;
-
-    <E> List<E> searchVOs(SearchObject so) throws DAOException;
-
-    long searchPOsCount(SearchObject so) throws DAOException;
-
-
-    int updatePO(T entity) throws DAOException;
-
-    T updatePOReturnObj(T entity) throws DAOException;
-
-    void updatePOBatch(List<T> entityList) throws DAOException;
+    int update(T entity) throws DAOException;
 
     int updatePOSelective(T entity) throws DAOException;
 
-    T updatePOSelectiveReturnObj(T entity) throws DAOException;
+    List<T> searchBySo(SearchObject so) throws DAOException;
 
+    <E> List<E> searchVosBySo(SearchObject so) throws DAOException;
 
-    void deletePOById(Long id) throws DAOException;
+    long searchCountBySo(SearchObject so) throws DAOException;
 
-    void deletePOBatchById(List<Long> idList) throws DAOException;
+    void deleteByPrimaryKey(Long id) throws DAOException;
+
+    T selectByPrimaryKey(Long id) throws DAOException;
+
+    T selectVoByPrimaryKey(Long id) throws DAOException;
+
 }
