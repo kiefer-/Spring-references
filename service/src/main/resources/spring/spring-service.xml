@@ -21,13 +21,19 @@
     <bean id="dozerBeanMapperBuilder" class="com.github.dozermapper.core.DozerBeanMapperBuilder"/>
 
     <!--Service 方法切入进行事务管理，比较粗粒度的事务管理，所以需要配置事务的传播行为-->
-    <bean id="handler" class="me.shouheng.service.common.aop.InnerMethodInterceptor"/>
+    <bean id="serviceHandler" class="me.shouheng.service.common.aop.ServiceMethodInterceptor"/>
+    <aop:config>
+        <!--对Service的方法的拦截-->
+        <aop:pointcut id="servicePointcut" expression="within(me.shouheng.service.service.impl.*)"/>
+        <aop:advisor advice-ref="serviceHandler" id="serviceAdvisor" pointcut-ref="servicePointcut"/>
+    </aop:config>
+
+    <!--Controller 方法切入进行异常控制-->
+    <bean id="controllerHandler" class="me.shouheng.service.common.aop.ControllerMethodInterceptor"/>
     <aop:config>
         <!--对Controller的方法的拦截-->
-        <!--<aop:pointcut id="pointcut" expression="@annotation(org.springframework.web.bind.annotation.RequestMapping)"/>-->
-        <!--对Service的方法的拦截-->
-        <aop:pointcut id="pointcut" expression="within(me.shouheng.service.service.impl.*)"/>
-        <aop:advisor advice-ref="handler" id="advisor" pointcut-ref="pointcut"/>
+        <aop:pointcut id="controllerPointcut" expression="@annotation(org.springframework.web.bind.annotation.RequestMapping)"/>
+        <aop:advisor advice-ref="controllerHandler" id="controllerAdvisor" pointcut-ref="controllerPointcut"/>
     </aop:config>
 
 </beans>

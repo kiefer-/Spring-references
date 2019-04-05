@@ -20,9 +20,9 @@ import java.util.List;
 /**
  * @author shouh, 2019/4/1-20:56
  */
-public class InnerMethodInterceptor implements MethodInterceptor {
+public class ServiceMethodInterceptor implements MethodInterceptor {
 
-    private static final Logger logger = LoggerFactory.getLogger(InnerMethodInterceptor.class);
+    private static final Logger logger = LoggerFactory.getLogger(ServiceMethodInterceptor.class);
 
     /**
      * 当指定的方法执行的事件大于下面的这个值的时候就将信息记录到日志中，单位：毫秒

@@ -56,6 +56,7 @@ public class UserController {
      * 模拟用户登录的接口，该接口的功能比较简单，仅用来测试
      * 如果想要实现更加标准的登录功能，除了返回标准 Token 之外，还要记录登录的日志，
      * 登录日志中还要增加更多的用户相关的信息，包括移动端的设备信息等
+     * 登录日志参考{@link me.shouheng.service.model.po.SysLoginLog}
      *
      * @param user 用户信息
      * @return 登录结果
@@ -67,7 +68,9 @@ public class UserController {
         if (TextUtils.isEmpty(user.getEmail()) || TextUtils.isEmpty(user.getPassword())) {
             return CommonUtils.getFailedPackVo(PackUserVo.class);
         }
+        // 1.登录
         PackUserVo packUserVo = userService.login(user);
+        // 2.记录登录日志，略
         logger.info("app login result {}", packUserVo);
         return packUserVo;
     }
