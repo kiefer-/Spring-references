@@ -10,7 +10,7 @@
 
     <name>Spring-references</name>
     <url>https://github.com/Shouheng88/Spring-references</url>
-	
+
 	<modules>
         <module>service</module>
         <module>common</module>
@@ -42,6 +42,7 @@
         <h2.version >1.4.197</h2.version>
         <swagger2 >2.6.1</swagger2>
         <jasypt.version>1.9.2</jasypt.version>
+        <rometools>1.8.0</rometools>
     </properties>
 
     <dependencyManagement>
@@ -233,11 +234,17 @@
                 <artifactId>commons-fileupload</artifactId>
                 <version>${commons-fileupload}</version>
             </dependency>
-            <!--jasypt-->
+            <!--Jasypt-->
             <dependency>
                 <groupId>org.jasypt</groupId>
                 <artifactId>jasypt</artifactId>
                 <version>${jasypt.version}</version>
+            </dependency>
+            <!--Rss 订阅-->
+            <dependency>
+                <groupId>com.rometools</groupId>
+                <artifactId>rome</artifactId>
+                <version>${rometools}</version>
             </dependency>
             <!--endregion-->
         </dependencies>

@@ -1,5 +1,11 @@
 package me.shouheng.service.controller;
 
+import com.rometools.rome.feed.atom.*;
+import com.rometools.rome.feed.rss.Channel;
+import com.rometools.rome.feed.rss.Description;
+import com.rometools.rome.feed.rss.Image;
+import com.rometools.rome.feed.rss.Item;
+import com.rometools.rome.feed.synd.SyndPerson;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import me.shouheng.common.model.BusinessRequest;
@@ -16,6 +22,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.util.Collections;
+import java.util.Date;
 
 import static me.shouheng.service.controller.TaskController.PATH_PREFIX;
 
@@ -42,6 +50,10 @@ public class TaskController {
     private static final String PAGE = "/page";
 
     private static final String UPLOAD = "/upload";
+
+    private static final String RSS = "/rss";
+
+    private static final String ATOM = "/atom";
 
     private final TaskService taskService;
 
@@ -146,4 +158,100 @@ public class TaskController {
         }
     }
 
+    /**
+     * RSS 订阅
+     *
+     * @return 返回 Channel 信息
+     */
+    @RequestMapping(value = RSS, method = RequestMethod.GET)
+    @ResponseBody
+    public Channel rss() {
+        Channel channel = new Channel();
+        channel.setFeedType("rss_2.0");
+        channel.setTitle("Leftso Feed");
+        channel.setDescription("最新技术的不同文章");
+        channel.setLink("http://www.leftso.com");
+        channel.setUri("http://www.leftso.com");
+        channel.setGenerator("在屋里编程");
+
+        Image image = new Image();
+        image.setUrl("/resources/assist/images/blog/b8fb228cdff44b8ea65d1e557bf05d2b.png");
+        image.setTitle("Leftso Feed");
+        image.setHeight(32);
+        image.setWidth(32);
+        channel.setImage(image);
+
+        Date postDate = new Date();
+        channel.setPubDate(postDate);
+
+        Item item = new Item();
+        item.setAuthor("Leftso");
+        item.setLink("http://www.leftso.com/blog/64.html");
+        item.setTitle("http://www.leftso.com/blog/64.html");
+        item.setUri("http://www.leftso.com/blog/64.html");
+        item.setComments("http://www.leftso.com/blog/64.html");
+
+        com.rometools.rome.feed.rss.Category category = new com.rometools.rome.feed.rss.Category();
+        category.setValue("CORS");
+        item.setCategories(Collections.singletonList(category));
+
+        Description descr = new Description();
+        descr.setValue("两者没有必然的联系,但是spring boot可以看作为spring MVC的升级版." + " <a rel=\"nofollow\" href=\"http://www.leftso.com/blog/64.html/\">Spring boot 入门(一)环境搭建以及第一个应用</a>发布在 <a rel=\"nofollow\" href=\"http://www.leftso.com\">Leftso</a>.");
+        item.setDescription(descr);
+        item.setPubDate(postDate);
+
+        channel.setItems(Collections.singletonList(item));
+        //Like more Entries here about different new topics
+        return channel;
+    }
+
+    /**
+     * RSS 订阅相关
+     *
+     * @return 返回 Feed 信息
+     */
+    @RequestMapping(value = ATOM, method = RequestMethod.GET)
+    @ResponseBody
+    public Feed atom() {
+        Feed feed = new Feed();
+        feed.setFeedType("atom_1.0");
+        feed.setTitle("Leftso");
+        feed.setId("http://www.leftso.com/");
+
+        Content subtitle = new Content();
+        subtitle.setType("text/plain");
+        subtitle.setValue("最新技术的不同文章");
+        feed.setSubtitle(subtitle);
+
+        Date postDate = new Date();
+        feed.setUpdated(postDate);
+
+        Entry entry = new Entry();
+
+        Link link = new Link();
+        link.setHref("http://www.leftso.com/blog/64.html");
+        entry.setAlternateLinks(Collections.singletonList(link));
+        SyndPerson author = new Person();
+        author.setName("Leftso");
+        entry.setAuthors(Collections.singletonList(author));
+        entry.setCreated(postDate);
+        entry.setPublished(postDate);
+        entry.setUpdated(postDate);
+        entry.setId("http://www.leftso.com/blog/64.html");
+        entry.setTitle("Spring boot 入门(一)环境搭建以及第一个应用");
+
+        Category category = new Category();
+        category.setTerm("CORS");
+        entry.setCategories(Collections.singletonList(category));
+
+        Content summary = new Content();
+        summary.setType("text/plain");
+        summary.setValue("两者没有必然的联系,但是spring boot可以看作为spring MVC的升级版."
+                + " <a rel=\"nofollow\" href=\"http://www.leftso.com/blog/64.html/\">Spring boot 入门(一)环境搭建以及第一个应用</a>发布在 <a rel=\"nofollow\" href=\"http://www.leftso.com\">Leftso</a>.");
+        entry.setSummary(summary);
+
+        feed.setEntries(Collections.singletonList(entry));
+        //参加这里关于不同的新话题
+        return feed;
+    }
 }
