@@ -2,6 +2,7 @@ package me.shouheng.common.dao.handler;
 
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
+import org.apache.ibatis.type.MappedTypes;
 
 import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
@@ -12,6 +13,7 @@ import java.util.Date;
 /**
  * @author shouh, 2019/3/31-18:12
  */
+@MappedTypes(value = {java.util.Date.class})
 public class DateTypeHandler extends BaseTypeHandler<Date> {
     @Override
     public void setNonNullParameter(PreparedStatement ps, int i, Date parameter, JdbcType jdbcType) throws SQLException {

@@ -105,6 +105,10 @@ public class SQLMapDialectInterceptor implements Interceptor {
         }
     }
 
+    public void setDialect(Dialect dialect) {
+        this.dialect = dialect;
+    }
+
     public static class BoundSqlSqlSource implements SqlSource {
 
         BoundSql boundSql;

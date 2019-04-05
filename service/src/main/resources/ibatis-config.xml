@@ -32,53 +32,53 @@
     </settings>
 
     <!--类型别名是为 Java 类型设置一个短的名字。 它只和 XML 配置有关，存在的意义仅在于用来减少类完全限定名的冗余。-->
-    <typeAliases>
-        <typeAlias alias="Task" type="me.shouheng.service.model.po.Task"/>
-        <typeAlias alias="TaskVo" type="me.shouheng.service.model.vo.TaskVo"/>
-        <typeAlias alias="user" type="me.shouheng.service.model.po.User"/>
-        <typeAlias alias="userVo" type="me.shouheng.service.model.vo.UserVo"/>
-        <typeAlias alias="DRUID" type="me.shouheng.service.common.dao.DruidDataSourceFactory"/>
-    </typeAliases>
+    <!--<typeAliases>-->
+        <!--<typeAlias alias="Task" type="me.shouheng.service.model.po.Task"/>-->
+        <!--<typeAlias alias="TaskVo" type="me.shouheng.service.model.vo.TaskVo"/>-->
+        <!--<typeAlias alias="user" type="me.shouheng.service.model.po.User"/>-->
+        <!--<typeAlias alias="userVo" type="me.shouheng.service.model.vo.UserVo"/>-->
+        <!--<typeAlias alias="DRUID" type="me.shouheng.service.common.dao.DruidDataSourceFactory"/>-->
+    <!--</typeAliases>-->
 
     <!--类型处理器：用来将获取的值以合适的方式转换成 Java 类型-->
-    <typeHandlers>
-        <typeHandler handler="me.shouheng.common.dao.handler.DateTypeHandler" javaType="java.util.Date"/>
-    </typeHandlers>
+    <!--<typeHandlers>-->
+    <!--<typeHandler handler="me.shouheng.common.dao.handler.DateTypeHandler" javaType="java.util.Date"/>-->
+    <!--</typeHandlers>-->
 
     <!--插件：用来在已映射语句执行过程中的某一点进行拦截调用-->
-    <plugins>
-        <plugin interceptor="me.shouheng.common.dao.dialect.SQLMapDialectInterceptor">
-            <property name="dialectClass" value="me.shouheng.common.dao.dialect.MySQLDialect"/>
-        </plugin>
-    </plugins>
+    <!--<plugins>-->
+        <!--<plugin interceptor="me.shouheng.common.dao.dialect.SQLMapDialectInterceptor">-->
+            <!--<property name="dialectClass" value="me.shouheng.common.dao.dialect.MySQLDialect"/>-->
+        <!--</plugin>-->
+    <!--</plugins>-->
 
-    <!--环境：数据源配置-->
-    <environments default="druid">
-        <!--使用 POOLED 作为数据源，注意：这种方式的数据源与激活的 profile 无关！-->
-        <environment id="pooled">
-            <transactionManager type="JDBC"/>
-            <dataSource type="POOLED">
-                <property name="driver" value="com.mysql.jdbc.Driver"/>
-                <property name="url" value="jdbc:mysql://localhost:3306/test?serverTimezone=GMT%2B8"/>
-                <property name="username" value="root"/>
-                <property name="password" value="qweasdzxc"/>
-                <property name="poolMaximumActiveConnections" value="10"/>
-                <property name="poolMaximumIdleConnections" value="20"/>
-            </dataSource>
-        </environment>
-        <!--使用 Druid 作为数据库的数据源，具体的数据源将依赖激活的 profile 文件-->
-        <environment id="druid">
-            <transactionManager type="JDBC"/>
-            <dataSource type="DRUID"/>
-        </environment>
-    </environments>
+    <!--&lt;!&ndash;环境：数据源配置&ndash;&gt;-->
+    <!--<environments default="druid">-->
+        <!--&lt;!&ndash;使用 POOLED 作为数据源，注意：这种方式的数据源与激活的 profile 无关！&ndash;&gt;-->
+        <!--<environment id="pooled">-->
+            <!--<transactionManager type="JDBC"/>-->
+            <!--<dataSource type="POOLED">-->
+                <!--<property name="driver" value="com.mysql.jdbc.Driver"/>-->
+                <!--<property name="url" value="jdbc:mysql://localhost:3306/test?serverTimezone=GMT%2B8"/>-->
+                <!--<property name="username" value="root"/>-->
+                <!--<property name="password" value="qweasdzxc"/>-->
+                <!--<property name="poolMaximumActiveConnections" value="10"/>-->
+                <!--<property name="poolMaximumIdleConnections" value="20"/>-->
+            <!--</dataSource>-->
+        <!--</environment>-->
+        <!--&lt;!&ndash;使用 Druid 作为数据库的数据源，具体的数据源将依赖激活的 profile 文件&ndash;&gt;-->
+        <!--<environment id="druid">-->
+            <!--<transactionManager type="JDBC"/>-->
+            <!--<dataSource type="DRUID"/>-->
+        <!--</environment>-->
+    <!--</environments>-->
 
     <!--Mapper 文件的位置-->
-    <mappers>
-        <mapper resource="mybatis/BaseMapper.xml"/>
-        <mapper resource="mybatis/CommonModelMapper.xml"/>
-        <mapper resource="mybatis/TaskMapper.xml"/>
-        <mapper resource="mybatis/UserMapper.xml"/>
-    </mappers>
+    <!--<mappers>-->
+        <!--<mapper resource="mybatis/BaseMapper.xml"/>-->
+        <!--<mapper resource="mybatis/CommonModelMapper.xml"/>-->
+        <!--<mapper resource="mybatis/TaskMapper.xml"/>-->
+        <!--<mapper resource="mybatis/UserMapper.xml"/>-->
+    <!--</mappers>-->
 
 </configuration>
