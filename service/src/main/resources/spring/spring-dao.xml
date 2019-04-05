@@ -9,9 +9,9 @@
     <context:component-scan base-package="me.shouheng.service.dao.*"/>
 
     <!--配置全局单例的Druid数据源提供器，交给Spring容器管理-->
-    <bean class="me.shouheng.service.common.dao.DruidDataSourceProvider" factory-method="getInstance">
-        <property name="dataSource" ref="dataSource"/>
-    </bean>
+    <!--<bean class="me.shouheng.service.common.dao.DruidDataSourceProvider" factory-method="getInstance">-->
+        <!--<property name="dataSource" ref="dataSource"/>-->
+    <!--</bean>-->
 
     <!--Druid 配置：https://github.com/alibaba/druid/wiki/%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98-->
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
@@ -85,6 +85,18 @@
                 </bean>
             </array>
         </property>
+    </bean>
+
+    <!--<bean class="me.shouheng.service.common.dao.SqlSessionFactoryProvider" factory-method="getInstance">-->
+        <!--<property name="sessionFactoryBean" ref="sqlSessionFactory"/>-->
+    <!--</bean>-->
+
+    <!-- 4.配置扫描Dao接口包，动态实现Dao接口，注入到spring容器中 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!-- 注入sqlSessionFactory -->
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
+        <!-- 给出需要扫描Dao接口包 -->
+        <property name="basePackage" value="me.shouheng.service.dao" />
     </bean>
 
     <!--使用annotation注解方式配置事务-->

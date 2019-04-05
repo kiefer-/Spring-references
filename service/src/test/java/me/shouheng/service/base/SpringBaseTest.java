@@ -1,9 +1,6 @@
 package me.shouheng.service.base;
 
 import me.shouheng.service.common.dao.SqlMapClientHolder;
-import me.shouheng.service.common.dao.SqlSessionHolder;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
@@ -14,7 +11,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  */
 @ActiveProfiles(value = "dev")
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations={"classpath*:spring/spring-*.xml"})
+@ContextConfiguration(locations={
+        "classpath*:spring/spring-dao.xml",
+        "classpath*:spring/spring-service.xml",
+        "classpath*:spring/spring-shiro.xml"})
 public class SpringBaseTest {
 
     public SpringBaseTest() {
@@ -25,14 +25,14 @@ public class SpringBaseTest {
         System.setProperty("javax.xml.parsers.SAXParserFactory", "com.sun.org.apache.xerces.internal.jaxp.SAXParserFactoryImpl");
     }
 
-    @Before
-    public void testBefore() {
-        SqlSessionHolder.initReuseSqlSession();
-    }
-
-    @After
-    public void testAfter() {
-        SqlSessionHolder.rollbackSession();
-    }
+//    @Before
+//    public void testBefore() {
+//        SqlSessionHolder.initReuseSqlSession();
+//    }
+//
+//    @After
+//    public void testAfter() {
+//        SqlSessionHolder.rollbackSession();
+//    }
 
 }
