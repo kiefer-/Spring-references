@@ -35,7 +35,7 @@
         <dozer-core>6.4.1</dozer-core>
         <javax.persistence-api>1.0</javax.persistence-api>
         <servlet.api>2.5</servlet.api>
-        <commons-configuration>1.5</commons-configuration>
+        <commons-configuration>1.10</commons-configuration>
         <lombok >1.18.6</lombok>
         <shiro >1.4.0</shiro>
         <commons-fileupload >1.4</commons-fileupload>
@@ -43,6 +43,9 @@
         <swagger2 >2.6.1</swagger2>
         <jasypt.version>1.9.2</jasypt.version>
         <rometools>1.8.0</rometools>
+        <commons-codec>1.10</commons-codec>
+        <joda-time>2.9.9</joda-time>
+        <commons-io>2.6</commons-io>
     </properties>
 
     <dependencyManagement>
@@ -234,6 +237,12 @@
                 <artifactId>commons-fileupload</artifactId>
                 <version>${commons-fileupload}</version>
             </dependency>
+            <!--文件处理-->
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>${commons-io}</version>
+            </dependency>
             <!--Jasypt-->
             <dependency>
                 <groupId>org.jasypt</groupId>
@@ -245,6 +254,18 @@
                 <groupId>com.rometools</groupId>
                 <artifactId>rome</artifactId>
                 <version>${rometools}</version>
+            </dependency>
+            <!--Apache codec-->
+            <dependency>
+                <groupId>commons-codec</groupId>
+                <artifactId>commons-codec</artifactId>
+                <version>${commons-codec}</version>
+            </dependency>
+            <!--JodaTime-->
+            <dependency>
+                <groupId>joda-time</groupId>
+                <artifactId>joda-time</artifactId>
+                <version>${joda-time}</version>
             </dependency>
             <!--endregion-->
         </dependencies>
