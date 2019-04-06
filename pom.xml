@@ -46,6 +46,8 @@
         <commons-codec>1.10</commons-codec>
         <joda-time>2.9.9</joda-time>
         <commons-io>2.6</commons-io>
+        <commons-csv>1.6</commons-csv>
+        <quartz>2.3.0</quartz>
     </properties>
 
     <dependencyManagement>
@@ -261,11 +263,23 @@
                 <artifactId>commons-codec</artifactId>
                 <version>${commons-codec}</version>
             </dependency>
+            <!--csv-->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-csv</artifactId>
+                <version>${commons-csv}</version>
+            </dependency>
             <!--JodaTime-->
             <dependency>
                 <groupId>joda-time</groupId>
                 <artifactId>joda-time</artifactId>
                 <version>${joda-time}</version>
+            </dependency>
+            <!--定时任务-->
+            <dependency>
+                <groupId>org.quartz-scheduler</groupId>
+                <artifactId>quartz</artifactId>
+                <version>${quartz}</version>
             </dependency>
             <!--endregion-->
         </dependencies>
