@@ -48,6 +48,7 @@
         <commons-io>2.6</commons-io>
         <commons-csv>1.6</commons-csv>
         <quartz>2.3.0</quartz>
+        <poi.version>4.0.1</poi.version>
     </properties>
 
     <dependencyManagement>
@@ -268,6 +269,17 @@
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-csv</artifactId>
                 <version>${commons-csv}</version>
+            </dependency>
+            <!--excel-->
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi</artifactId>
+                <version>${poi.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.poi</groupId>
+                <artifactId>poi-ooxml</artifactId>
+                <version>${poi.version}</version>
             </dependency>
             <!--JodaTime-->
             <dependency>
