@@ -163,8 +163,8 @@ public class TaskController {
      *
      * @return 返回 Channel 信息
      */
-    @RequestMapping(value = RSS, method = RequestMethod.GET)
     @ResponseBody
+    @RequestMapping(value = RSS, method = RequestMethod.GET)
     public Channel rss() {
         Channel channel = new Channel();
         channel.setFeedType("rss_2.0");
@@ -210,8 +210,8 @@ public class TaskController {
      *
      * @return 返回 Feed 信息
      */
-    @RequestMapping(value = ATOM, method = RequestMethod.GET)
     @ResponseBody
+    @RequestMapping(value = ATOM, method = RequestMethod.GET)
     public Feed atom() {
         Feed feed = new Feed();
         feed.setFeedType("atom_1.0");

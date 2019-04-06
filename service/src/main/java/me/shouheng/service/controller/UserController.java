@@ -38,8 +38,8 @@ public class UserController {
         this.userService = userService;
     }
 
-    @RequestMapping(path = REGISTER, method = RequestMethod.POST)
     @ResponseBody
+    @RequestMapping(path = REGISTER, method = RequestMethod.POST)
     public PackUserVo register(@RequestBody UserVo user) {
         logger.info("app register info {}", user);
         if (TextUtils.isEmpty(user.getEmail()) || TextUtils.isEmpty(user.getPassword())) {
@@ -52,6 +52,7 @@ public class UserController {
         return packUserVo;
     }
 
+
     /**
      * 模拟用户登录的接口，该接口的功能比较简单，仅用来测试
      * 如果想要实现更加标准的登录功能，除了返回标准 Token 之外，还要记录登录的日志，
@@ -61,8 +62,8 @@ public class UserController {
      * @param user 用户信息
      * @return 登录结果
      */
-    @RequestMapping(path = LOGIN, method = RequestMethod.POST)
     @ResponseBody
+    @RequestMapping(path = LOGIN, method = RequestMethod.POST)
     public PackUserVo login(@RequestBody UserVo user) {
         logger.info("app login info {}", user);
         if (TextUtils.isEmpty(user.getEmail()) || TextUtils.isEmpty(user.getPassword())) {
@@ -74,5 +75,4 @@ public class UserController {
         logger.info("app login result {}", packUserVo);
         return packUserVo;
     }
-
 }
