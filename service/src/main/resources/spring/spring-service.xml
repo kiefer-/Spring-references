@@ -32,4 +32,13 @@
         <aop:advisor advice-ref="controllerHandler" id="controllerAdvisor" pointcut-ref="controllerPointcut"/>
     </aop:config>
 
+    <!--使用 Spring 进行性能监控-->
+    <bean id="performanceMonitor"
+          class="org.springframework.aop.interceptor.PerformanceMonitorInterceptor">
+    </bean>
+    <aop:config>
+        <aop:pointcut id="allServiceMethods" expression="execution(* me.shouheng.service.service.impl.*.*(..))"/>
+        <aop:advisor pointcut-ref="allServiceMethods" advice-ref="performanceMonitor" order="2"/>
+    </aop:config>
+
 </beans>
