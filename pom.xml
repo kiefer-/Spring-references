@@ -41,6 +41,8 @@
         <commons-fileupload >1.4</commons-fileupload>
         <h2.version >1.4.197</h2.version>
         <swagger2 >2.6.1</swagger2>
+        <ehcache.version>2.10.6</ehcache.version>
+        <mybatis-ehcache.version>1.0.3</mybatis-ehcache.version>
     </properties>
 
     <dependencyManagement>
@@ -164,6 +166,18 @@
                 <artifactId>mybatis-spring</artifactId>
                 <version>${mybatis.spring.version}</version>
             </dependency>
+            <!--region Ehcache-->
+            <dependency>
+                <groupId>net.sf.ehcache</groupId>
+                <artifactId>ehcache</artifactId>
+                <version>${ehcache.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mybatis.caches</groupId>
+                <artifactId>mybatis-ehcache</artifactId>
+                <version>${mybatis-ehcache.version}</version>
+            </dependency>
+            <!--endregion Ehcache-->
             <!--启用 Java 数据库相关的注解-->
             <dependency>
                 <groupId>javax.persistence</groupId>
