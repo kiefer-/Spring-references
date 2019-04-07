@@ -52,4 +52,13 @@ public class TaskServiceTest extends SpringBaseTest {
         Assert.assertTrue(updateRes !=null && "remark was updated".equals(updateRes.getRemark()));
     }
 
+    @Test
+    public void testSearchAll() {
+        TaskSo so = new TaskSo();
+        List<TaskVo> voList0 = taskService.searchTask(so).getVoList();
+        List<TaskVo> voList1 = taskService.searchTask(so).getVoList();
+        Assert.assertTrue(voList0 != null && voList0.size() > 0);
+        Assert.assertTrue(voList1 != null && voList1.size() > 0);
+    }
+
 }
