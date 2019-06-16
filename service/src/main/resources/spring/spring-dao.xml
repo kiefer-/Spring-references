@@ -62,15 +62,15 @@
     <tx:annotation-driven/>
 
     <beans profile="dev">
-        <context:property-placeholder location="classpath*:configs/jdbc-dev.properties" />
+        <context:property-placeholder location="classpath*:configs/jdbc-dev.properties" ignore-unresolvable="true"/>
     </beans>
 
     <beans profile="test">
-        <context:property-placeholder location="classpath*:configs/jdbc-test.properties" />
+        <context:property-placeholder location="classpath*:configs/jdbc-test.properties" ignore-unresolvable="true"/>
     </beans>
 
     <beans profile="prod">
-        <context:property-placeholder location="classpath*:configs/jdbc-prod.properties" />
+        <context:property-placeholder location="classpath*:configs/jdbc-prod.properties" ignore-unresolvable="true"/>
     </beans>
 
 </beans>
