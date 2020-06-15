@@ -26,7 +26,7 @@
         <slf4j.version>1.7.25</slf4j.version>
         <javax.mail>1.4</javax.mail>
         <javax.activation>1.1.1</javax.activation>
-        <spring.version>5.1.1.RELEASE</spring.version>
+        <spring.version>5.2.7.RELEASE</spring.version>
         <mybatis>3.0.6</mybatis>
         <mybatis.spring.version>1.2.3</mybatis.spring.version>
         <fastjson>1.2.56</fastjson>
