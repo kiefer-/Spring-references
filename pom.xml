@@ -31,7 +31,7 @@
         <mybatis.spring.version>1.2.3</mybatis.spring.version>
         <fastjson>1.2.56</fastjson>
         <jackson-databind>2.8.8.1</jackson-databind>
-        <fasterxml.jackson>2.9.8</fasterxml.jackson>
+        <fasterxml.jackson>2.11.1</fasterxml.jackson>
         <dozer-core>6.4.1</dozer-core>
         <javax.persistence-api>1.0</javax.persistence-api>
         <servlet.api>2.5</servlet.api>
